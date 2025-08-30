@@ -61,13 +61,75 @@ const string categoriasJuegos[TOTAL_JUEGOS] = {
         "Estrategia","Estrategia","Estrategia"
 };
 
-// ---------------------------------------------------
-// Prototipos de funciones
-// ---------------------------------------------------
+/**
+ * @brief Stock de cada juego.
+ */
+int stockJuego[TOTAL_JUEGOS] = {
+        50,50,50,
+        50,50,50,
+        50,50,50,
+        50,50,50
+};
 
+/**
+ * @brief Cantidad de cada juego en el carrito.
+ */
+int cantidadesCarrito[MAX_ITEMS_CARRITO];
+
+/**
+ * @brief Codigo de cada juego en el carrito
+ */
+int codigosCarrito[MAX_ITEMS_CARRITO];
+
+/**
+ * @brief Numero de items que se estan comprando
+ */
+int numItems = 0;
+
+// --- Declaraciones de funciones ---
 /**
  * @brief Muestra el catálogo de juegos en la tienda
  */
 void mostrarCatalogoJuegos();
+
+/**
+ * @brief Solicita al usuario un código de juego válido
+ * @return Código de juego ingresado
+ */
+int leerCodigoJuego();
+
+/**
+ * @brief Solicita al usuario la cantidad de juegos
+ * @return Cantidad ingresada
+ */
+int leerCantidadJuegos();
+
+/**
+ * @brief Retorna el nombre de un juego dado su código
+ * @param codigoJuego Código del juego
+ * @return Nombre del juego
+ */
+string obtenerNombreJuego(int codigoJuego);
+
+/**
+ * @brief Retorna el precio de un juego dado su código
+ * @param codigoJuego Código del juego
+ * @return Precio del juego
+ */
+double obtenerPrecioJuego(int codigoJuego);
+
+/**
+ * @brief Retorna la plataforma de un juego dado su código
+ * @param codigoJuego Código del juego
+ * @return Plataforma del juego
+ */
+string obtenerPlataforma(int codigoJuego);
+
+/**
+ * @brief Retorna la categoría de un juego dado su código
+ * @param codigoJuego Código del juego
+ * @return Categoría del juego
+ */
+string obtenerCategoria(int codigoJuego);
 
 #endif // GAMESTORE_H
