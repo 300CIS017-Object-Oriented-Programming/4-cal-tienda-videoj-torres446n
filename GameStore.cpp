@@ -87,26 +87,21 @@ string obtenerCategoria(int codigoJuego) {
 
 void agregarJuegoAlCarrito(int codigos[], int cantidades[], int& cantidadJuegosRegistrados) {
     int codigo, cantidad;
-    if (cantidadJuegosRegistrados >= MAX_ITEMS_CARRITO) {
+    int espacioActualDelCarrito = contarCopiasEnCarrito(cantidades, cantidadJuegosRegistrados);
+    if (espacioActualDelCarrito >= MAX_ITEMS_CARRITO) {
         cout << "El carrito ya esta lleno\n";
         return;
     }
-    cout << "Ingrese el codigo del juego: ";
-    cin >> codigo;
-
-    if (!existeCodigoJuego(codigo)) {
-        cout << "Error: El codigo ingresado no corresponde a ningun juego disponible.\n";
-        return;
-    }
+    codigo = leerCodigoJuego();
 
     string nombreJuego = obtenerNombreJuego(codigo);
 
-    cout << "Ingrese la cantidad de copias del juego " << nombreJuego  << " que quieres comprar: ";
-    cin >> cantidad;
+    cout << "El codigo " << codigo  << " pertenece al juego: " << nombreJuego << "\n";
+    cantidad = leerCantidadJuegos();
 
-    if (cantidadJuegosRegistrados + cantidad > MAX_ITEMS_CARRITO) {
+    if (espacioActualDelCarrito + cantidad > MAX_ITEMS_CARRITO) {
         cout << "Se excedio la cantidad de items del carrito\n";
-        cout << "Espacio actual del carrito: " << cantidadJuegosRegistrados << "\n";
+        cout << "Espacio actual del carrito: " << espacioActualDelCarrito << "\n";
         return;
     }
 
@@ -122,7 +117,7 @@ void agregarJuegoAlCarrito(int codigos[], int cantidades[], int& cantidadJuegosR
     // Si no estaba, se agrega al final
     codigos[cantidadJuegosRegistrados] = codigo;
     cantidades[cantidadJuegosRegistrados] = cantidad;
-    cantidadJuegosRegistrados += cantidad;
+    cantidadJuegosRegistrados++;
     cout << "Se ha agregado correctamente la cantidad de " << cantidad << " copias del juego " << nombreJuego << " en el carrito!\n";
 }
 
@@ -209,7 +204,7 @@ void mostrarResumenCompra(const int codigos[], const int cantidades[], int canti
              << " - $" << obtenerPrecioJuego(codigos[i]) << " c/u\n";
     }
 
-    cout << "---------------------------------\n" << endl;
+    cout << "---------------------------------\n";
     cout << "Subtotal: $" << subtotal << "\n";
     cout << "Descuento cliente: -$" << descuentoCliente << "\n";
     cout << "Descuentos adicionales: -$" << descuentoExtra << "\n";
@@ -221,15 +216,29 @@ void cargarCompraDemo(int codigos[], int cantidades[], int& cantidadJuegosRegist
     codigos[0] = 101;
     cantidades[0] = 2;
     codigos[1] = 103;
-    cantidades[1] = 1;
-    cantidadJuegosRegistrados = 2;
+    cantidades[1] = 4;
+    codigos[2] = 203;
+    cantidades[2] = 1;
+    codigos[3] = 201;
+    cantidades[3] = 1;
+    codigos[4] = 301;
+    cantidades[4] = 2;
+    cantidadJuegosRegistrados = 5;
 }
 
-bool existeCodigoJuego(int codigo) {
-    for (int i = 0; i < TOTAL_JUEGOS; i++) {
-        if (codigosJuegos[i] == codigo) {
-            return true;
-        }
+int contarCopiasEnCarrito(const int cantidades[], int cantidadJuegosRegistrados) {
+    int totalCopias = 0;
+    for (int i = 0; i < cantidadJuegosRegistrados; i++) {
+        totalCopias += cantidades[i];
     }
-    return false;
+    return totalCopias;
+}
+
+void limpiarCarrito(int codigos[], int cantidades[], int& cantidadJuegosRegistrados) {
+    for (int i = 0; i < cantidadJuegosRegistrados; i++) {
+        codigos[i] = 0;
+        cantidades[i] = 0;
+    }
+    cantidadJuegosRegistrados = 0;
+    cout << "El carrito ha sido vaciado correctamente.\n";
 }

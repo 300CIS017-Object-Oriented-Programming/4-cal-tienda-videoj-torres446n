@@ -32,13 +32,13 @@ const string nombresJuegos[TOTAL_JUEGOS] = {
 };
 
 /**
- * @brief Precio de cada juego en pesos colombianos
+ * @brief Precio de cada juego en dolares
  */
 const double preciosJuegos[TOTAL_JUEGOS]= {
-        250000, 200000, 180000,
-        270000, 90000, 80000,
-        280000, 250000, 150000,
-        200000, 220000, 170000
+        60, 50, 45,
+        70, 20, 15,
+        70, 60, 40,
+        50, 55, 45
 };
 
 /**
@@ -61,16 +61,6 @@ const string categoriasJuegos[TOTAL_JUEGOS] = {
         "Estrategia","Estrategia","Estrategia"
 };
 
-/**
-
-
-int stockJuego[TOTAL_JUEGOS] = {
-        50,50,50,
-        50,50,50,
-        50,50,50,
-        50,50,50
-};
-*/
 // --- Declaraciones de funciones ---
 /**
  * @brief Muestra el catálogo de juegos en la tienda
@@ -188,11 +178,21 @@ void mostrarResumenCompra(const int codigos[], const int cantidades[], int canti
  */
 void cargarCompraDemo(int codigos[], int cantidades[], int& cantidadJuegosRegistrados);
 
+
 /**
- * @brief Funcion auxiliar para verificar si el codigo es valido.
- * @param codigo Codigo a ingresarr.
- * @return booleano que indica si existe o no.
+ * @brief Funcion auxiliar que cuenta la cantidad total de copias en el carrito.
+ * @param cantidades Arreglo con las cantidades de cada juego.
+ * @param cantidadJuegosRegistrados Número de juegos distintos en el carrito.
+ * @return Cantidad total de copias en el carrito.
  */
-bool existeCodigoJuego(int codigo);
+int contarCopiasEnCarrito(const int cantidades[], int cantidadJuegosRegistrados);
+
+/**
+ * @brief Limpia todo el carrito de compras.
+ * @param codigos Arreglo de códigos de juegos en el carrito.
+ * @param cantidades Arreglo de cantidades correspondientes a cada juego.
+ * @param cantidadJuegosRegistrados Referencia al número de juegos actualmente en el carrito.
+ */
+void limpiarCarrito(int codigos[], int cantidades[], int& cantidadJuegosRegistrados);
 
 #endif // GAMESTORE_H
