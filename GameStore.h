@@ -126,10 +126,81 @@ double obtenerPrecioJuego(int codigoJuego);
 string obtenerPlataforma(int codigoJuego);
 
 /**
- * @brief Retorna la categoría de un juego dado su código
- * @param codigoJuego Código del juego
- * @return Categoría del juego
+ * @brief Retorna la categoría de un juego dado su código.
+ * @param codigoJuego Código del juego.
+ * @return Categoría del juego.
  */
 string obtenerCategoria(int codigoJuego);
+
+/**
+ * @brief Agrega un juego al carrito de compras.
+ * @param codigos Arreglo de códigos de juegos en el carrito.
+ * @param cantidades Arreglo de cantidades correspondientes a cada juego en el carrito.
+ * @param cantidadJuegosRegistrados Referencia al número actual de juegos en el carrito.
+ */
+void agregarJuegoAlCarrito(int codigos[], int cantidades[], int& cantidadJuegosRegistrados);
+
+/**
+ * @brief Calcula el subtotal de todos los juegos en el carrito.
+ * @param codigos Arreglo de códigos de juegos en el carrito.
+ * @param cantidades Arreglo de cantidades correspondientes a cada juego.
+ * @param cantidadJuegosRegistrados Número de juegos actualmente en el carrito.
+ * @return Subtotal acumulado (no incluye descuentos).
+ */
+double calcularSubtotalCarrito(const int codigos[], const int cantidades[], int cantidadJuegosRegistrados);
+
+/**
+ * @brief Lee el tipo de cliente.
+ * @return Tipo de cliente (1 = Regular, 2 = Premium, 3 = VIP).
+ */
+int leerTipoCliente();
+
+/**
+ * @brief Obtiene el porcentaje de descuento según el tipo de cliente.
+ * @param tipoCliente Tipo de cliente (1 = Regular, 2 = Premium, 3 = VIP).
+ * @return Porcentaje de descuento en decimal.
+ */
+double obtenerPorcentajeDescuento(int tipoCliente);
+
+
+/**
+ * @brief Calcula descuentos adicionales según las cantidades compradas.
+ * @param codigos Arreglo de códigos de juegos en el carrito.
+ * @param cantidades Arreglo de cantidades correspondientes a cada juego.
+ * @param cantidadJuegosRegistrados Número de juegos actualmente en el carrito.
+ * @return Valor total de descuentos adicionales aplicables.
+ */
+double calcularDescuentosAdicionales(const int codigos[], const int cantidades[], int cantidadJuegosRegistrados);
+
+/**
+ * @brief Calcula el total final después de aplicar descuentos.
+ * Descuentos:
+ * - Si el cliente compra más de 1 juego de categoría "Acción", se aplica un 10% de descuento
+ *   sobre el subtotal de esos juegos.
+ * - Si el cliente compra más de 3 juegos de plataforma "PS5", se aplica un 15% de descuento
+ *   sobre el subtotal de esos juegos.
+ * @param subtotal Subtotal de la compra (sin descuentos).
+ * @param porcentajeDescuento Descuento por tipo de cliente (ej: 0.1 = 10%).
+ * @param descuentosAdicionales Valor total de descuentos adicionales.
+ * @return double Total a pagar después de aplicar todos los descuentos.
+ */
+double calcularTotalFinal(double subtotal, double porcentajeDescuento, double descuentosAdicionales);
+
+/**
+ * @brief Muestra un resumen detallado de la compra.
+ * @param codigos Arreglo de códigos de juegos en el carrito.
+ * @param cantidades Arreglo de cantidades correspondientes a cada juego.
+ * @param cantidadJuegosRegistrados Número de juegos actualmente en el carrito.
+ * @param porcentajeDescuento Descuento aplicado según el tipo de cliente.
+ */
+void mostrarResumenCompra(const int codigos[], const int cantidades[], int cantidadJuegosRegistrados, double porcentajeDescuento);
+
+/**
+ * @brief Carga un carrito de compras de demostración.
+ * @param codigos Arreglo de códigos de juegos en el carrito.
+ * @param cantidades Arreglo de cantidades correspondientes a cada juego.
+ * @param cantidadJuegosRegistrados Referencia al número de juegos en el carrito.
+ */
+void cargarCompraDemo(int codigos[], int cantidades[], int& cantidadJuegosRegistrados);
 
 #endif // GAMESTORE_H
