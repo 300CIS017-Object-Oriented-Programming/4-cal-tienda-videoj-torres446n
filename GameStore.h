@@ -62,30 +62,15 @@ const string categoriasJuegos[TOTAL_JUEGOS] = {
 };
 
 /**
- * @brief Stock de cada juego.
- */
+
+
 int stockJuego[TOTAL_JUEGOS] = {
         50,50,50,
         50,50,50,
         50,50,50,
         50,50,50
 };
-
-/**
- * @brief Cantidad de cada juego en el carrito.
- */
-int cantidadesCarrito[MAX_ITEMS_CARRITO];
-
-/**
- * @brief Codigo de cada juego en el carrito
- */
-int codigosCarrito[MAX_ITEMS_CARRITO];
-
-/**
- * @brief Numero de items que se estan comprando
- */
-int numItems = 0;
-
+*/
 // --- Declaraciones de funciones ---
 /**
  * @brief Muestra el catálogo de juegos en la tienda
@@ -202,5 +187,12 @@ void mostrarResumenCompra(const int codigos[], const int cantidades[], int canti
  * @param cantidadJuegosRegistrados Referencia al número de juegos en el carrito.
  */
 void cargarCompraDemo(int codigos[], int cantidades[], int& cantidadJuegosRegistrados);
+
+/**
+ * @brief Funcion auxiliar para verificar si el codigo es valido.
+ * @param codigo Codigo a ingresarr.
+ * @return booleano que indica si existe o no.
+ */
+bool existeCodigoJuego(int codigo);
 
 #endif // GAMESTORE_H

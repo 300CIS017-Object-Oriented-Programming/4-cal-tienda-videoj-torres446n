@@ -87,10 +87,28 @@ string obtenerCategoria(int codigoJuego) {
 
 void agregarJuegoAlCarrito(int codigos[], int cantidades[], int& cantidadJuegosRegistrados) {
     int codigo, cantidad;
+    if (cantidadJuegosRegistrados >= MAX_ITEMS_CARRITO) {
+        cout << "El carrito ya esta lleno\n";
+        return;
+    }
     cout << "Ingrese el codigo del juego: ";
     cin >> codigo;
-    cout << "Ingrese la cantidad a comprar: ";
+
+    if (!existeCodigoJuego(codigo)) {
+        cout << "Error: El codigo ingresado no corresponde a ningun juego disponible.\n";
+        return;
+    }
+
+    string nombreJuego = obtenerNombreJuego(codigo);
+
+    cout << "Ingrese la cantidad de copias del juego " << nombreJuego  << " que quieres comprar: ";
     cin >> cantidad;
+
+    if (cantidadJuegosRegistrados + cantidad > MAX_ITEMS_CARRITO) {
+        cout << "Se excedio la cantidad de items del carrito\n";
+        cout << "Espacio actual del carrito: " << cantidadJuegosRegistrados << "\n";
+        return;
+    }
 
     // Verificar si el código ya está en el carrito
     for (int i = 0; i < cantidadJuegosRegistrados; i++) {
@@ -104,8 +122,8 @@ void agregarJuegoAlCarrito(int codigos[], int cantidades[], int& cantidadJuegosR
     // Si no estaba, se agrega al final
     codigos[cantidadJuegosRegistrados] = codigo;
     cantidades[cantidadJuegosRegistrados] = cantidad;
-    cantidadJuegosRegistrados++;
-    cout << "Juego agregado al carrito.\n";
+    cantidadJuegosRegistrados += cantidad;
+    cout << "Se ha agregado correctamente la cantidad de " << cantidad << " copias del juego " << nombreJuego << " en el carrito!\n";
 }
 
 double calcularSubtotalCarrito(const int codigos[], const int cantidades[], int cantidadJuegosRegistrados) {
@@ -205,4 +223,13 @@ void cargarCompraDemo(int codigos[], int cantidades[], int& cantidadJuegosRegist
     codigos[1] = 103;
     cantidades[1] = 1;
     cantidadJuegosRegistrados = 2;
+}
+
+bool existeCodigoJuego(int codigo) {
+    for (int i = 0; i < TOTAL_JUEGOS; i++) {
+        if (codigosJuegos[i] == codigo) {
+            return true;
+        }
+    }
+    return false;
 }
